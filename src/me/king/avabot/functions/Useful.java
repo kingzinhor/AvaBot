@@ -2,7 +2,10 @@ package me.king.avabot.functions;
 
 import me.king.avabot.main.AvaBot;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONObject;
@@ -18,9 +21,20 @@ import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Useful {
 
+    // Verifies if the message's author is me
+    public static Boolean isOwner(User user){
+        return user.getId().equals("348664615175192577");
+    }
+
+
+
+
+
+    // Return an embed with a description and a default color if not specified
     public static MessageEmbed simpleEmbed(String text){
         EmbedBuilder embed = new EmbedBuilder()
                 .setDescription(text)
@@ -28,7 +42,6 @@ public class Useful {
 
         return embed.build();
     }
-
     public static MessageEmbed simpleEmbed(String text, Color color){
     EmbedBuilder embed = new EmbedBuilder()
             .setDescription(text)
@@ -37,6 +50,41 @@ public class Useful {
         return embed.build();
     }
 
+
+
+
+
+    // Traditional mode of sending messages with JDA is pretty mad, so I made this function that only need the channel and the text/embed
+    public static void sendMessage(MessageChannelUnion channel, String text){
+        channel.sendMessage(text).queue();
+    }
+    public static void sendMessage(MessageChannelUnion channel, MessageEmbed embed){
+        channel.sendMessage(new MessageBuilder().setEmbeds(embed).build()).queue();
+    }
+
+
+
+
+
+    // Checks if an array contains or not some value inside it
+    public static Boolean arrayContains(String[] array, String key){
+        for (String item : array) {
+            if (item.equals(key)){ return true; }
+        }
+        return false;
+    }
+    public static Boolean arrayContains(int [] array, int key){
+        for (int item : array){
+            if (item == key){ return true; }
+        }
+        return false;
+    }
+
+
+
+
+
+    // This function make all the work of getting data from a RESTFUL API
     public static JSONObject getApiJsonObject(String url) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 

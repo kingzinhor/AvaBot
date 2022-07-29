@@ -1,6 +1,8 @@
 package me.king.avabot.main;
 
+import me.king.avabot.commands.Basicos;
 import me.king.avabot.commands.Experimental;
+import me.king.avabot.commands.Help;
 import me.king.avabot.commands.Services;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -52,5 +54,7 @@ public class AvaBot {
 
         jda.addEventListener(new Experimental());
         jda.addEventListener(new Services());
+        jda.addEventListener(new Help());
+        jda.addEventListener(new Basicos());
     }
 }

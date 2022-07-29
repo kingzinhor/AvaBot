@@ -6,9 +6,6 @@ import me.king.avabot.classes.*;
 import me.king.avabot.main.AvaBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -16,27 +13,25 @@ import org.json.simple.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Services extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event){
 
-        Context context = new Context(event);
+        MessageReceivedContext context = new MessageReceivedContext(event);
 
-        if (!(context.author.isBot()) && context.prefixUsed){ // Preventing bots from using the command
+        if (!(event.getAuthor().isBot()) && context.getPrefixUsed()){ // Preventing bots from using the command
 
-            if (context.command.equals("locate")){
+            if (context.getCommand().equals("locate")){
 
-                if (!(context.args.length > 0)){ // Forcing the submission of arguments
-                    context.channel.sendMessage(new MessageBuilder().setEmbeds(Useful.simpleEmbed(
-                        ":face_with_monocle: I can see no CEP given here...", Color.red)).build()).queue();
+                if (!(context.getArgs().length > 0)){ // Forcing the submission of arguments
+                    Useful.sendMessage(event.getChannel(), Useful.simpleEmbed(":face_with_monocle: I can see no CEP given here...", Color.red));
                 }
                 else {
 
                     // Creating the API request URL
-                    String cepUrl = String.format("https://brasilapi.com.br/api/cep/v1/%s", context.args[0]);
+                    String cepUrl = String.format("https://brasilapi.com.br/api/cep/v1/%s", context.getArgs()[0]);
 
                     try {
 
@@ -57,10 +52,10 @@ public class Services extends ListenerAdapter {
                                 .setFooter("Cep: " + cep)
                                 .setColor(AvaBot.color);
 
-                        context.channel.sendMessage(new MessageBuilder().setEmbeds(embedBuilder.build()).build()).queue();
+                        Useful.sendMessage(event.getChannel(), embedBuilder.build());
 
                     } catch (IOException e) {
-                        context.channel.sendMessage(new MessageBuilder(Useful.simpleEmbed("Something goes wrong! Verify you write the CEP correctly.", Color.red)).build()).queue();
+                        Useful.sendMessage(event.getChannel(), Useful.simpleEmbed(":thermometer_face: Something went wrong! Verify you wrote the CEP correctly.", Color.red));
                         throw new RuntimeException(e);
                     }
                 }
