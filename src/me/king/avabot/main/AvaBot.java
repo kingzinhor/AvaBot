@@ -1,6 +1,6 @@
 package me.king.avabot.main;
 
-import me.king.avabot.commands.Basicos;
+import me.king.avabot.commands.Basics;
 import me.king.avabot.commands.Experimental;
 import me.king.avabot.commands.Help;
 import me.king.avabot.commands.Services;
@@ -14,10 +14,8 @@ import org.json.simple.parser.ParseException;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.EnumSet;
 
 public class AvaBot {
@@ -55,6 +53,6 @@ public class AvaBot {
         jda.addEventListener(new Experimental());
         jda.addEventListener(new Services());
         jda.addEventListener(new Help());
-        jda.addEventListener(new Basicos());
+        jda.addEventListener(new Basics());
     }
 }

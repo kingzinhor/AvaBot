@@ -26,6 +26,7 @@ public class Help extends ListenerAdapter {
                 "repository"
         };
         if (Useful.arrayContains(gihubCommandAliases, context.getCommand())){
+            event.getChannel().sendTyping().queue();
             MessageEmbed embed = new EmbedBuilder()
                     .setAuthor("Github repository", "https://www.github.com/kingzinhor/AvaBot", "https://cdn.discordapp.com/attachments/1000364153522901004/1002558982868717608/unknown.png")
                     .setDescription("Hi! You can access my public Github repository by clicking up there, or accessing this link: https://www.github.com/kingzinhor/AvaBot")
@@ -34,6 +35,37 @@ public class Help extends ListenerAdapter {
                     .build();
 
             Useful.sendMessage(event.getChannel(), embed);
+        }
+
+        String[] helCommandAliases = {
+                "help",
+                "commands",
+                "info"
+        };
+        if (Useful.arrayContains(helCommandAliases, context.getCommand()) && context.getPrefixUsed()){
+            event.getChannel().sendTyping().queue();
+            MessageEmbed embed = new EmbedBuilder()
+                    .setAuthor("Help", null, "https://cdn.discordapp.com/attachments/1000364153522901004/1002718441108688917/unknown.png")
+                    .setDescription("Hi, im Ava! I'm a Java discord bot made by <@348664615175192577> for learning purpose. You can see some of my commands down bellow:")
+                    .addField("Information",
+                            "• `Help` - shows my commands and basic information." +
+                                "\n• `Github` - Shows my public Github repository.",
+                            false)
+                    .addField("Basics",
+                            "• `Ping` - show latency in ms",
+                            false)
+                    .addField("Services",
+                            "• `locate` - give a CEP, and it will show you the localization",
+                            false)
+                    .addField("Experimentals",
+                            "• `test` - that's an exclusive admin command. It's used to do what its name says, testing" +
+                                "\n• `self` - another exclusive admin command. Used to inform how the bot is recognizing the information. Useful for tests",
+                            false)
+                    .setColor(AvaBot.color)
+                    .build();
+
+            Useful.sendMessage(event.getChannel(), embed);
+
         }
     }
 }

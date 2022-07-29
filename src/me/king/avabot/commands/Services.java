@@ -24,6 +24,7 @@ public class Services extends ListenerAdapter {
         if (!(event.getAuthor().isBot()) && context.getPrefixUsed()){ // Preventing bots from using the command
 
             if (context.getCommand().equals("locate")){
+                event.getChannel().sendTyping().queue();
 
                 if (!(context.getArgs().length > 0)){ // Forcing the submission of arguments
                     Useful.sendMessage(event.getChannel(), Useful.simpleEmbed(":face_with_monocle: I can see no CEP given here...", Color.red));

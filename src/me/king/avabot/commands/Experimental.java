@@ -24,7 +24,7 @@ public class Experimental extends ListenerAdapter {
                 "test"
         };
         if (Useful.arrayContains(textCommandAliases, context.getCommand()) && Useful.isOwner(event.getAuthor())){
-
+            event.getChannel().sendTyping().queue();
         }
 
         // This command is for see how the information is coming when using one
@@ -34,6 +34,7 @@ public class Experimental extends ListenerAdapter {
                 "autotest"
         };
         if (Useful.arrayContains(selfCommandAliases, context.getCommand()) && Useful.isOwner(event.getAuthor())){
+            event.getChannel().sendTyping().queue();
             EmbedBuilder embedBuilder = new EmbedBuilder()
                     .addField("Prefix used?", context.getPrefixUsed().toString(), false)
                     .addField("Command", context.getCommand(), false)
