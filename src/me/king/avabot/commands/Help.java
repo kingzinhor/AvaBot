@@ -20,6 +20,7 @@ public class Help extends ListenerAdapter {
 
         MessageReceivedContext context = new MessageReceivedContext(event);
 
+        // Show up Ava's public repository on Github
         String[] gihubCommandAliases = {
                 "github",
                 "git",
@@ -37,6 +38,10 @@ public class Help extends ListenerAdapter {
             Useful.sendMessage(event.getChannel(), embed);
         }
 
+
+
+
+        // This command will show all the commands ands its description
         String[] helCommandAliases = {
                 "help",
                 "commands",
@@ -55,7 +60,8 @@ public class Help extends ListenerAdapter {
                             "• `Ping` - show latency in ms",
                             false)
                     .addField("Services",
-                            "• `locate` - give a CEP, and it will show you the localization",
+                            "• `locate` - give a CEP, and it will show you the localization" +
+                                    "• `weather` - information about the specified location",
                             false)
                     .addField("Experimentals",
                             "• `test` - that's an exclusive admin command. It's used to do what its name says, testing" +

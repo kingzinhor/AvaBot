@@ -34,6 +34,13 @@ public class Useful {
 
 
 
+    // Capitalizes a string
+    public static String capitalize(String string){
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
+
+
+
     // Return an embed with a description and a default color if not specified
     public static MessageEmbed simpleEmbed(String text){
         EmbedBuilder embed = new EmbedBuilder()
