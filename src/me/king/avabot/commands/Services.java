@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class Services extends ListenerAdapter {
 
@@ -57,7 +58,7 @@ public class Services extends ListenerAdapter {
                                 .addField("__Neighborhood__", neighborhood, false)
                                 .addField("__City__", city, false)
                                 .addField("__State__", state, false)
-                                .setFooter("Cep: " + cep)
+                                .setFooter("API: Brasil API")
                                 .setColor(AvaBot.color);
 
                         Useful.sendMessage(event.getChannel(), embedBuilder.build());
@@ -107,7 +108,7 @@ public class Services extends ListenerAdapter {
                                 .addField("__Time__", Useful.capitalize(currently) + " " + time, false)
                                 .addField("__Humidity__", humidity, false)
                                 .addField("__Wind__", wind_speedy, false)
-                                .setFooter("Api: HG API")
+                                .setFooter("API: HG Brasil")
                                 .setColor(AvaBot.color);
 
                         Useful.sendMessage(event.getChannel(), embedBuilder.build());
