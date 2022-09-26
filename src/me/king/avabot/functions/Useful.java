@@ -20,16 +20,19 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.parser.ParseException;
 
 import java.awt.*;
+import java.io.Console;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Useful {
+
 
     // Verifies if the message's author is me
     public static Boolean isOwner(User user){
         return user.getId().equals("348664615175192577");
     }
-
 
 
 
@@ -59,8 +62,6 @@ public class Useful {
 
 
 
-
-
     // Traditional mode of sending messages with JDA is pretty mad, so I made this function that only need the channel and the text/embed
     public static void sendMessage(MessageChannelUnion channel, String text){
         channel.sendMessage(text).queue();
@@ -80,9 +81,15 @@ public class Useful {
         }
         return false;
     }
-    public static Boolean arrayContains(int [] array, int key){
+    public static Boolean arrayContains(int[] array, int key){
         for (int item : array){
             if (item == key){ return true; }
+        }
+        return false;
+    }
+    public static Boolean arrayContains(char[] array, char key){
+        for (char item : array){
+            if (item == key){return true;}
         }
         return false;
     }

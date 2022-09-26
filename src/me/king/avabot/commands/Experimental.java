@@ -23,8 +23,23 @@ public class Experimental extends ListenerAdapter {
         String[] textCommandAliases = {
                 "test"
         };
-        if (Useful.arrayContains(textCommandAliases, context.getCommand()) && Useful.isOwner(event.getAuthor())){
+        if (Useful.arrayContains(textCommandAliases, context.getCommand()) /*&& Useful.isOwner(event.getAuthor())*/){
             event.getChannel().sendTyping().queue();
+
+            String sentence = String.join("", context.getArgs()).replaceAll("\\s+","").toLowerCase();
+
+            if (sentence.length() <= 0){
+                event.getChannel().sendMessage("No sentence given!").queue();
+            }
+            else {
+                try{
+                    Useful.sendMessage(event.getChannel(), "`" + sentence + "` = `" + Calculator.calc(sentence, event) + "`");
+                }catch (Exception e){
+                    Useful.sendMessage(event.getChannel(), "Invalid sentece!");
+                    Useful.sendMessage(event.getChannel(), e.getMessage());
+                    e.printStackTrace();
+                }
+            }
         }
 
         // This command is for see how the information is coming when using one
