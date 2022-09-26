@@ -33,7 +33,7 @@ public class Experimental extends ListenerAdapter {
             }
             else {
                 try{
-                    Useful.sendMessage(event.getChannel(), "`" + sentence + "` = `" + Calculator.calc(sentence, event) + "`");
+                    Useful.sendMessage(event.getChannel(), "`" + sentence + "` =/≅ `" + Calculator.calc(sentence, event) + "`");
                 }catch (Exception e){
                     Useful.sendMessage(event.getChannel(), "Invalid sentece!");
                     Useful.sendMessage(event.getChannel(), e.getMessage());

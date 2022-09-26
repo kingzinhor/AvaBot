@@ -3,6 +3,7 @@ package me.king.avabot.classes;
 import me.king.avabot.functions.Useful;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,8 @@ public class Calculator {
     static char[] lastOperators = { '+', '-' }; // Addition and subtraction operators.
 
     static char[] operatorsChars = { '+', '-', '*', '/', '^'}; // All operators.
+
+    static DecimalFormat df = new DecimalFormat("#.00000");
 
 
 
@@ -118,6 +121,7 @@ public class Calculator {
                 }
 
                 double res = Math.pow(Double.parseDouble(xTerm), Double.parseDouble(yTerm)); // Finally doing the exponentiation between "x" and "y".
+                res = Double.parseDouble(df.format(res).replace(",", "."));
 
                 // Here im replacing the exponentiation part for its result.
                 String start = sentence.substring(0, openIndex) + "+";
@@ -169,6 +173,8 @@ public class Calculator {
                     res = x / y;
                 }
 
+                res = Double.parseDouble(df.format(res).replace(",", "."));
+
                 String start = sentence.substring(0, openIndex) + "+";
                 String middle = String.valueOf(res);
                 String end = sentence.substring(openIndex + xTerm.length() + yTerm.length() + 1);
@@ -176,8 +182,6 @@ public class Calculator {
                 sentence = arrangeOperators(start + middle + end);
                 Useful.sendMessage(event.getChannel(),"New sentence: `" + sentence + "`");
             }
-
-
 
             // After solving all brackets, exponentiation, multiplications and divisions, let's do the addiction between all terms.
             List<String> termsList = new ArrayList<String>();
@@ -202,6 +206,8 @@ public class Calculator {
                 result += Double.parseDouble(term);
             }
 
+
+            result = Double.parseDouble(df.format(result).replace(",", "."));
             Useful.sendMessage(event.getChannel(),"Throwing result: `" + result + "`");
             return result;
         }else{
